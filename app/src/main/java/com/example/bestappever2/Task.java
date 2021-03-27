@@ -2,6 +2,8 @@ package com.example.bestappever2;
 
 public class Task {
 
+    private  int id;
+    boolean state;
     private String name, desc, date;
 
     public int getColorNote() {
@@ -22,16 +24,15 @@ public class Task {
         this.date = date;
     }
 
-    private boolean expandable;
 
-    //@Entity
-    public Task(String name, String desc, String date, int colorNote) {
+    public Task(int id,String name, String desc, String date, boolean state, int colorNote) {
        // @PrimaryKey
+        this.id  = id;
         this.name = name;
         this.desc = desc;
         this.date = date;
+        this.state = state;
         this.colorNote = colorNote;
-        this.expandable = false;
     }
 
     public String getName() {
@@ -54,11 +55,12 @@ public class Task {
         this.desc = desc;
     }
 
-    public boolean isExpandable() {
-        return expandable;
+
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setExpandable(boolean expandable) {
-        this.expandable = expandable;
+    public int getId() {
+        return id;
     }
 }

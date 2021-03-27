@@ -9,23 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <EditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Заголовок"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="Описание"
             android:inputType="textMultiLine" />
 
         <CalendarView
@@ -35,27 +36,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:background="@drawable/roundbutton"
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
+                android:background="@drawable/roundbutton"
+                android:onClick="close"
                 android:text="Отмена" />
 
             <Button
-                android:background="@drawable/roundbutton"
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:text="Создать
-" />
+                android:background="@drawable/roundbutton"
+                android:onClick="add"
+                android:text="Создать" />
         </LinearLayout>
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
