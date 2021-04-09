@@ -41,11 +41,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
         holder.descTxt.setText(task.getDesc());
         holder.checkBox.setText(task.getName());
         holder.dateTxt.setText(task.getDate());
-        holder.expendableLayout.setVisibility(holder.expendableLayout.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+        boolean isExpandable = taskList.get(position).isExpandable();
+        holder.expendableLayout.setVisibility(isExpandable ? View.VISIBLE : View.GONE);
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -58,7 +56,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
         TextView descTxt, dateTxt;
         CheckBox checkBox;
         LinearLayout linearLayout;
-        LinearLayout expendableLayout;
+        RelativeLayout expendableLayout;
 
 
         public TaskVH(@NonNull View itemView) {
@@ -76,7 +74,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
                 @Override
                 public void onClick(View v) {
 
-                    expendableLayout.setVisibility(expendableLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+
+                    Task task = taskList.get(getAdapterPosition());
+                    task.setExpandable(!task.isExpandable());
+                    notifyItemChanged(getAdapterPosition());
                 }
             });
             linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
@@ -90,6 +91,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
                     intent[0].putExtra("keyName",task.getName());
                     intent[0].putExtra("keyDesc",task.getDesc());
                     intent[0].putExtra("keyColor",task.getColorNote());
+
+
 
                     context.startActivities(intent);
 
