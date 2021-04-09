@@ -17,8 +17,6 @@ public class Editor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
@@ -29,10 +27,9 @@ public class Editor extends AppCompatActivity {
         int keyColor = arguments.getInt("keyColor");
         String keyName  = arguments.get("keyName").toString();
 
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable((keyColor)));
-
+        actionBar.setTitle(keyName);
         name = findViewById(R.id.name);
 
         name.setText(keyName);
