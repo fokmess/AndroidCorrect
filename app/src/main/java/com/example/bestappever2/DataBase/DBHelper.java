@@ -7,8 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 11;
     public static final String DB_NAME = "BD_note"; //название базы данных
+
     public static final String TABLE_NOTES = "notes"; //название таблицы
 
     public static final String NOTE_ID = "id_name"; //ид заметки
@@ -25,13 +26,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TABLE_NOTES + "(" + NOTE_ID + " integer_primary_key, " + TITLE_NOTE + " text, " + NOTE_DESCRIPTION + " text, " + NOTE_DATE + " text, " + NOTE_STATE + " integer, "+ NOTE_TYPE + "text" +")" );
-
+        sqLiteDatabase.execSQL("create table " + TABLE_NOTES + "(" + NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE_NOTE + " text, " + NOTE_DESCRIPTION + " text, " + NOTE_DATE + " text, " + NOTE_STATE + " integer, " + NOTE_TYPE + " text" + ")");
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        if (i < i1) {
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+            onCreate(sqLiteDatabase);
+        }
 
     }
 }
