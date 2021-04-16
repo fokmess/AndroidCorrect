@@ -2,6 +2,7 @@ package com.example.bestappever2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +40,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
         Task task = taskList.get(position);
         holder.linearLayout.setBackgroundColor(task.getColorNote());
         holder.descTxt.setText(task.getDesc());
+        holder.checkBox.setChecked(task.state);
         holder.checkBox.setText(task.getName());
         holder.dateTxt.setText(task.getDate());
         holder.expendableLayout.setVisibility(holder.expendableLayout.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -69,6 +68,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
             descTxt = itemView.findViewById(R.id.description);
             checkBox = itemView.findViewById(R.id.checktask);
 
+            checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   taskList.get(getAdapterPosition()).state = !taskList.get(getAdapterPosition()).state;
+
+                }
+            });
             linearLayout = itemView.findViewById(R.id.linear_layout);
             expendableLayout = itemView.findViewById(R.id.expandable_layout);
 
@@ -76,7 +82,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
                 @Override
                 public void onClick(View v) {
 
-                    expendableLayout.setVisibility(expendableLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                    expendableLayout.setVisibility(taskList.get(getAdapterPosition()).visibility ? View.VISIBLE : View.GONE);
                 }
             });
             linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
@@ -85,13 +91,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskVH> {
 
                     Context context = v.getContext();
 
-                    Task task = taskList.get(getAdapterPosition());
-                    Intent[] intent = new Intent[]{new Intent(context, Editor.class)};
-                    intent[0].putExtra("keyName",task.getName());
-                    intent[0].putExtra("keyDesc",task.getDesc());
-                    intent[0].putExtra("keyColor",task.getColorNote());
+                    Intent intent = new Intent(context, AddNote.class);
+                    intent.putExtra("task",taskList.get(getAdapterPosition()));
 
-                    context.startActivities(intent);
+                    context.startActivity(intent);
 
                     return true;
                 }

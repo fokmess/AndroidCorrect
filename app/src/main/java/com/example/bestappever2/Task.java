@@ -1,9 +1,11 @@
 package com.example.bestappever2;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
 
     private  int id;
-    boolean state;
+    boolean state,visibility;
     private String name, desc, date;
 
     public int getColorNote() {
@@ -33,6 +35,7 @@ public class Task {
         this.date = date;
         this.state = state;
         this.colorNote = colorNote;
+        this.visibility = false;
     }
 
     public String getName() {

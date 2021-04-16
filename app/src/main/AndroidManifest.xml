@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BestAppEver2">
 
-        <activity android:name=".Editor"/>
-
         <activity
             android:name=".AddNote"
            />
