@@ -111,6 +111,7 @@ public class GlobalTask extends AppCompatActivity {
 
         Cursor cursor = database.query(DBHelper.TABLE_NOTES,
                 null, null, null, null, null, null);
+
         if (cursor.moveToFirst()) {
             int id_note = cursor.getColumnIndex(DBHelper.NOTE_ID);
             int id_name = cursor.getColumnIndex(DBHelper.TITLE_NOTE);
@@ -138,6 +139,12 @@ public class GlobalTask extends AppCompatActivity {
 
         startActivity(new Intent(this,
                 AddNote.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
+
     }
 }
